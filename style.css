@@ -3,6 +3,7 @@
 /* Personalize as cores, fontes e espaçamentos aqui */
 /* ============================================ */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belleza&display=swap');
 
 :root {
     /* CORES PRINCIPAIS - Vermelho, Rosa e Preto */
@@ -34,9 +35,12 @@
     --warning-color: #ffc107;
     --info-color: #17a2b8;
 
-        /* TIPOGRAFIA */
-    --font-primary: 'Roboto', sans-serif;
-    --font-secondary: 'Roboto', sans-serif;
+    /* TIPOGRAFIA */
+    --font-primary: 'Belleza', serif;
+    --font-secondary: 'Belleza', serif;
+    /* TIPOGRAFIA */
+    /* --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Roboto', sans-serif; */
 
     --font-size-xs: 0.75rem;
     /* 12px */
@@ -1348,6 +1352,44 @@ img {
         padding: var(--spacing-3xl) 0;
     }
 
+    /* Seção SOBRE */
+    .sobre {
+        background-color: #20293c;
+    }
+
+    .sobre__container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .sobre__content {
+        order: 1;
+    }
+
+    .sobre__image {
+        order: 2;
+        margin-top: var(--spacing-xl);
+    }
+
+    .sobre__image img {
+        max-width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+
+    .sobre__text {
+        font-size: var(--font-size-sm);
+        text-align: justify;
+    }
+
+    .sobre__features {
+        grid-template-columns: 1fr;
+    }
+
+    .feature__item {
+        padding: var(--spacing-md);
+    }
+
     /* Menu Mobile */
     .nav__menu {
         position: fixed;
@@ -1383,8 +1425,44 @@ img {
     }
 
     /* Hero */
+    /* Hero */
+    .hero {
+        background-attachment: scroll;
+        min-height: 80vh;
+    }
+
+    .hero__container {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-xl) 0;
+    }
+
+    .hero__content {
+        text-align: center;
+    }
+
+    .hero__title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .hero__description {
+        text-align: center;
+        font-size: var(--font-size-base);
+    }
+
     .hero__buttons {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .hero__image-circle {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
     }
 
     .hero__stats {
@@ -1513,3 +1591,58 @@ img {
     }
 }
 */
+/* ============================================ */
+/* EFEITO DE LUZ SEGUINDO MOUSE */
+/* ============================================ */
+
+.cursor-light {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244, 166, 211, 0.6) 0%, rgba(244, 166, 211, 0.3) 60%, rgba(244, 166, 211, 0) 100%);
+    box-shadow: 
+        0 0 30px rgba(244, 166, 211, 0.5),
+        0 0 60px rgba(244, 166, 211, 0.3),
+        inset 0 0 30px rgba(244, 166, 211, 0.2);
+    pointer-events: none;
+    z-index: 9999;
+    filter: blur(1px);
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+}
+
+.cursor-light.active {
+    background: radial-gradient(circle, rgba(98, 0, 31, 0.7) 0%, rgba(98, 0, 31, 0.4) 60%, rgba(98, 0, 31, 0) 100%);
+    box-shadow: 
+        0 0 40px rgba(98, 0, 31, 0.6),
+        0 0 80px rgba(98, 0, 31, 0.4),
+        inset 0 0 30px rgba(98, 0, 31, 0.3);
+}
+
+.cursor-particles {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #F4A6D3;
+    pointer-events: none;
+    animation: particleFade 1s ease-out forwards;
+}
+
+@keyframes particleFade {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}

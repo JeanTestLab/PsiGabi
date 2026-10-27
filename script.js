@@ -1,6 +1,5 @@
 // ============================================
-// LANDING PAGE - ESCRITÓRIO DE ADVOCACIA
-// Oliveira & Associados Advogados
+// LANDING PAGE - Psicologa Gabriela
 // ============================================
 
 // ============================================
@@ -389,6 +388,80 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     console.log('Modo escuro detectado no sistema');
     // EDITÁVEL: Adicione lógica para modo escuro se desejar
 }
+
+// ============================================
+// EFEITO DE LUZ SEGUINDO MOUSE
+// ============================================
+
+const cursorLight = document.getElementById('cursorLight');
+const cursorParticles = document.getElementById('cursorParticles');
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
+
+// Rastrear posição do mouse
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Criar partículas
+    createParticle(mouseX, mouseY);
+});
+
+// Animar a luz seguindo o mouse (com delay suave)
+function animateCursorLight() {
+    cursorX += (mouseX - cursorX) * 0.1;
+    cursorY += (mouseY - cursorY) * 0.1;
+
+    cursorLight.style.left = cursorX + 'px';
+    cursorLight.style.top = cursorY + 'px';
+
+    requestAnimationFrame(animateCursorLight);
+}
+
+// Criar partículas ao redor do cursor
+function createParticle(x, y) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+
+    // Posição aleatória ao redor do cursor
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * 30 + 10;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    particle.style.setProperty('--tx', tx + 'px');
+    particle.style.setProperty('--ty', ty + 'px');
+
+    cursorParticles.appendChild(particle);
+
+    // Remover partícula após animação
+    setTimeout(() => {
+        particle.remove();
+    }, 1000);
+}
+
+// Detectar quando passa em botões/links (muda cor)
+document.addEventListener('mouseover', (e) => {
+    if (e.target.matches('button, a, .button, .servico__card, .beneficio__item, .faq__item')) {
+        cursorLight.classList.add('active');
+    }
+});
+
+document.addEventListener('mouseout', (e) => {
+    if (e.target.matches('button, a, .button, .servico__card, .beneficio__item, .faq__item')) {
+        cursorLight.classList.remove('active');
+    }
+});
+
+// Iniciar animação
+animateCursorLight();
+
+// Esconder cursor padrão
+document.body.style.cursor = 'none';
 
 // ============================================
 // FIM DO SCRIPT
